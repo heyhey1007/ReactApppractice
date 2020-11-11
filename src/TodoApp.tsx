@@ -14,23 +14,36 @@ class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [
-        new Todo(1, "title1"),
-        new Todo(2, "title2"),
-        new Todo(3, "title3"),
-        new Todo(4, "title4")
-      ],
+      todos: [],
       nextId: 0
     };
   }
   render() {
+    const { todos } = this.state;
     return (
       <div>
         <h2>TodoApp</h2>
-        <AddTodo />
-        <List todos={this.state.todos} />
+        <AddTodo addTodo={this.addTodo} />
+        <List todos={todos} deleteTodo={this.deleteTodo} />
       </div>
     );
   }
+
+  addTodo = (title: string) => {
+    const { todos, nextId } = this.state;
+    this.setState({
+      todos: [...todos, new Todo(nextId + 1, title)],
+      nextId: nextId + 1
+    });
+  };
+
+  deleteTodo = (id: number) => {
+    this.setState({
+      todos: this.state.todos.filter((todo) => {
+        return todo.id !== id;
+      }),
+      nextId: this.state.nextId
+    });
+  };
 }
 export default TodoApp;
