@@ -8,14 +8,14 @@ import TodoApp from "./TodoApp";
 //   (todo) => todo.id !== deleteTargetId
 // );
 
-const Todos = ({ todos }) => {
-  const list = todos.map((todo) => {
-    return (
-      <li>
-        {todo.id} {todo.tilte}
-      </li>
-    );
-  });
-  return <ul>{list}</ul>;
-};
+// const Todos = ({ todos }) => {
+//   const list = todos.map((todo) => {
+//     return (
+//       <li>
+//         {todo.id} {todo.tilte}
+//       </li>
+//     );
+//   });
+//   return <ul>{list}</ul>;
+// };
 render(<TodoApp />, document.getElementById("root"));

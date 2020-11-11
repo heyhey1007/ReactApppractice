@@ -7,9 +7,18 @@ interface ListProps {
 }
 
 const List: React.FC<ListProps> = (props) => {
+  const list = props.todos.map((todo) => {
+    return (
+      <li>
+        {" "}
+        #{todo.id} {todo.title}
+      </li>
+    );
+  });
   return (
     <>
       <h2>List</h2>
+      <ul>{list}</ul>
     </>
   );
 };
