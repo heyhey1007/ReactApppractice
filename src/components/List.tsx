@@ -1,25 +1,40 @@
 import React from "react";
-import { render } from "react-dom";
 import { Todo } from "../Todo.model";
 
 interface ListProps {
   todos: Todo[];
+  deleteTodo: Function;
 }
+interface ListState {}
 
-const List: React.FC<ListProps> = (props) => {
-  const list = props.todos.map((todo) => {
+const List = class List extends React.Component<ListProps, ListState> {
+  constructor(props: ListProps) {
+    super(props);
+  }
+
+  render() {
+    const { deleteTodo, todos } = this.props;
+    const list = todos.map((todo) => {
+      return (
+        <li key={todo.id}>
+          {" "}
+          #{todo.id} {todo.title}
+          <button
+            onClick={() => {
+              deleteTodo(todo.id);
+            }}
+          >
+            delete
+          </button>
+        </li>
+      );
+    });
     return (
-      <li>
-        {" "}
-        #{todo.id} {todo.title}
-      </li>
+      <>
+        <h2>List</h2>
+        <ul>{list}</ul>
+      </>
     );
-  });
-  return (
-    <>
-      <h2>List</h2>
-      <ul>{list}</ul>
-    </>
-  );
+  }
 };
 export default List;
